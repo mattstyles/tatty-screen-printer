@@ -6,7 +6,8 @@ import ScreenBaseModule from '../tatty-screen-base-module/index';
  * @extends ScreenBaseModule
  *
  * @events
- *
+ *   print:char <{Char},{Integer}> called with each print, passing the char printed and the index of its position within the whole string
+ *   print:complete <> called when the whole string has been printed
  */
 export default class PrinterModule extends ScreenBaseModule {
 
@@ -14,7 +15,7 @@ export default class PrinterModule extends ScreenBaseModule {
      * @constructs
      * @param name {String} the module id
      */
-    constructor( name='printerModule', el ) {
+    constructor( name='printerModule' ) {
         this.name = name;
     }
 
@@ -24,15 +25,9 @@ export default class PrinterModule extends ScreenBaseModule {
      * @param self {ScreenBaseModule} Screen will call init in its own scope but pass the module scope to it
      */
     init( self ) {
-
         Object.assign( this.defaults, {
             printDelay: 100
         });
-
-        // Ready handler
-        // this.on( 'ready', function( self ) {
-        //
-        // }, this );
     }
 
     /**
@@ -48,7 +43,6 @@ export default class PrinterModule extends ScreenBaseModule {
              * @param chars {String} the string to print out
              */
             print: function( chars ) {
-                this.writeln();
                 let index = 0;
 
                 var printNext = function() {

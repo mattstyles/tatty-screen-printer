@@ -1,6 +1,6 @@
 {
   "name": "tatty-screen-printer",
-  "version": "0.2.0",
+  "version": "0.1.1",
   "description": "Module extension for tatty-screen that adds a delayed print method",
   "main": "index.js",
   "scripts": {
