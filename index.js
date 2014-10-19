@@ -1,5 +1,13 @@
 import ScreenBaseModule from '../tatty-screen-base-module/index';
 
+/**
+ * Printer module is a simple mixin that justs add a method to allow delayed printing i.e. one character at a time. Will emit an event when the printing has finished.
+ *
+ * @extends ScreenBaseModule
+ *
+ * @events
+ *
+ */
 export default class PrinterModule extends ScreenBaseModule {
 
     /**
@@ -17,11 +25,15 @@ export default class PrinterModule extends ScreenBaseModule {
      */
     init( self ) {
 
-        this.on( 'ready', function() {
+        Object.assign( this.defaults, {
+            printDelay: 100
+        });
 
-        }, this );
+        // Ready handler
+        // this.on( 'ready', function( self ) {
+        //
+        // }, this );
     }
-
 
     /**
      * Exposed API
@@ -30,7 +42,33 @@ export default class PrinterModule extends ScreenBaseModule {
      */
     expose( self ) {
         return {
-            
+            /**
+             * Prints one character at a time
+             *
+             * @param chars {String} the string to print out
+             */
+            print: function( chars ) {
+                this.writeln();
+                let index = 0;
+
+                var printNext = function() {
+                    var char = chars.slice( index, index + 1 );
+                    this.emit( 'print:char', char, index );
+                    this.write( char );
+                    index++;
+
+                    // Print the next character if there is one
+                    if ( index <= chars.length ) {
+                        setTimeout( printNext, this.opts.printDelay );
+                        return;
+                    }
+
+                    // Fire an event and halt the loop
+                    this.emit( 'print:complete' );
+                }.bind( this );
+
+                printNext();
+            }
         }
     }
 }
