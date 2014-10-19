@@ -1,0 +1,31 @@
+{
+  "name": "tatty-screen-printer",
+  "version": "0.2.0",
+  "description": "Module extension for tatty-screen that adds a delayed print method",
+  "main": "index.js",
+  "scripts": {
+    "watch": "./build/watch.js",
+    "build": "./build/build.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Matt Styles @personalurban",
+  "keywords": [
+    "es6",
+    "screen",
+    "printer",
+    "tty",
+    "teleprinter",
+    "module"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mattstyles/tatty-screen-printer"
+  },
+  "bugs": {
+    "url": "https://github.com/mattstyles/tatty-screen-printer/issues"
+  },
+  "license": "WTFPL",
+  "dependencies": {
+    "tatty-screen-base-module": "~1.0.1"
+  }
+}
